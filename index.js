@@ -32,6 +32,13 @@ async function run() {
             const product = await fabCollection.findOne(query);
             res.send(product);
         });
+
+        // post individual product
+        app.post('/inventory', async (req, res) => {
+            const newProduct = req.body;
+            const result = await fabCollection.insertOne(newProduct);
+            res.send(result);
+        })
     }
     finally{}
 }

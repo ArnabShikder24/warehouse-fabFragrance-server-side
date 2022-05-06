@@ -39,6 +39,14 @@ async function run() {
             const result = await fabCollection.insertOne(newProduct);
             res.send(result);
         })
+
+        // Delete individual Product
+        app.delete('/inventory/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await fabCollection.deleteOne(query);
+            res.send(result);
+        });
     }
     finally{}
 }

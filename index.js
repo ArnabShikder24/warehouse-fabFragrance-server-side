@@ -47,6 +47,36 @@ async function run() {
             const result = await fabCollection.deleteOne(query);
             res.send(result);
         });
+
+        // Update items with put
+        app.put('/inventory/:id', async (req, res) => {
+            const id = req.params.id;
+            const newQantity = req.body.quantity;
+            const filter = {_id: ObjectId(id)};
+            const options = {upsert: true};
+            const updateDoc = {
+                $set: {
+                    quantity: newQantity
+                }
+            };
+            const result = await fabCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        });
+
+        // Restock quantity api
+        app.put('/restock/:id', async (req, res) => {
+            const id = req.params.id;
+            const reStockQuantity = req.body.quantity;
+            const filter = {_id: ObjectId(id)};
+            const options = {upsert: true};
+            const updateDoc = {
+                $set: {
+                    quantity: reStockQuantity
+                }
+            };
+            const result = await fabCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        });
     }
     finally{}
 }

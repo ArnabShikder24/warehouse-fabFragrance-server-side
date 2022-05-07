@@ -77,6 +77,15 @@ async function run() {
             const result = await fabCollection.updateOne(filter, updateDoc, options);
             res.send(result);
         });
+
+        // get Items with query email
+        app.get('/myItem', async (req, res) => {
+            const email = req.query.email;
+            const query = {email: email};
+            const cursor = fabCollection.find(query);
+            const items = await cursor.toArray();
+            res.send(items);
+        });
     }
     finally{}
 }

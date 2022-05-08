@@ -124,7 +124,7 @@ run().catch(console.dir)
 
 
 app.get('/', (req, res) => {
-    res.send('assignment 11 server is running...')
+    res.send('Fab Fragrance server is running...')
 });
 
 app.listen(port, () => console.log('server in running this port', port));
